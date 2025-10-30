@@ -27,14 +27,6 @@
     <ul class="nav-links">
       <li><a href="{% url 'home' %}">Home</a></li>
       <li><a href="{% url 'products' %}">Shop</a></li>
-      <li>
-        <a href="#">Categories</a>
-        <ul class="dropdown">
-          {% for category in categories %}
-            <li><a href="{% url 'category_products' category.id %}">{{ category.name }}</a></li>
-          {% endfor %}
-        </ul>
-      </li>
       <li><a href="{% url 'contact' %}">Contact Us</a></li>
       <li><a href="{% url 'about' %}">About Us</a></li>
 
@@ -118,7 +110,6 @@
       <div class="product-card">
         <img src="{{ product.image.url }}" alt="{{ product.name }}">
         <h3>{{ product.name }}</h3>
-        <p class="price">₹{{ product.price }}</p>
         <a href="{% url 'product_detail' product.id %}" class="btn">View Details</a>
       </div>
     {% endfor %}
@@ -183,7 +174,7 @@
     </div>
     <div class="social-media">
       <h4>Follow Us</h4>
-      <a href="#"><img src="{% static 'images/facebook.png' %}" alt="Facebook"></a>
+      <a href="#"><img src="{% static 'images/logo.png' %}" alt="Facebook"></a>
       <a href="#"><img src="{% static 'images/instagram.png' %}" alt="Instagram"></a>
       <a href="#"><img src="{% static 'images/twitter.png' %}" alt="Twitter"></a>
     </div>

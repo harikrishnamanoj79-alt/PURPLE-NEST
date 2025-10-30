@@ -1,14 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/about.css' %}">
 {% endblock %}
 
 
-{% extends 'base.html' %}
+
 
 {% block content %}
 
 <!-- HERO BANNER -->
-<section class="about-hero" style="background-image: url('{% static "images/about-hero.jpg" %}');">
+<section class="about-hero" style="background-image: url('{% static "images/about-hero.png" %}');">
   <div class="hero-overlay">
     <div class="hero-text">
       <h1>About Purple Nest</h1>

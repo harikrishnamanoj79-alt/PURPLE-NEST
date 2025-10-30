@@ -2,90 +2,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Waves Tech{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Purple Nest{% endblock %}</title>
 
-  <!-- CSS -->
+  <!-- Main Style -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-   <!-- Extra page-specific CSS -->
+  
+  <!-- Page-specific extra CSS -->
   {% block extra_css %}{% endblock %}
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-  <!-- ================= NAVBAR ================= -->
-  <nav class="navbar">
+<!-- ============================= -->
+<!-- NAVBAR -->
+<!-- ============================= -->
+<header>
+  <nav class="navbar sticky">
     <div class="logo">
-      <img src="{% static 'images/logo.png' %}" alt="Logo">
+      <img src="{% static 'images/logo.png' %}" alt="Purple Nest Logo">
       Purple Nest
     </div>
 
     <ul class="nav-links">
       <li><a href="{% url 'home' %}">Home</a></li>
-      <li><a href="{% url 'products' %}">Products</a></li>
-      <li><a href="{% url 'about' %}">About</a></li>
-      <li><a href="{% url 'contact' %}">Contact</a></li>
+      <li><a href="{% url 'products' %}">Shop</a></li>
+      <li><a href="{% url 'contact' %}">Contact Us</a></li>
+      <li><a href="{% url 'about' %}">About Us</a></li>
+
+      <!-- Search Bar -->
+      <li class="nav-search">
+        <form method="GET" action="{% url 'search_products' %}">
+          <input type="text" name="q" placeholder="Search products..." required>
+          <button type="submit">🔍</button>
+        </form>
+      </li>
 
       {% if user.is_authenticated %}
-        <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        <li><a href="{% url 'my_orders' %}">My Orders</a></li>
         <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="{% url 'cart_view' %}">🛒 Cart ({{ request.user.cart_set.count }})</a></li>
       {% else %}
         <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'register' %}">Register</a></li>
       {% endif %}
     </ul>
-
-    <div class="nav-search">
-      <form method="get" action="{% url 'search_products' %}">
-        <input type="text" name="q" placeholder="Search products..." />
-        <button type="submit">Search</button>
-      </form>
-    </div>
   </nav>
+</header>
 
-    <!-- ================= MESSAGE ALERTS ================= -->
-  {% if messages %}
-    <div class="messages">
-      {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-          {{ message }}
-        </div>
-      {% endfor %}
+<!-- ============================= -->
+<!-- PAGE CONTENT -->
+<!-- ============================= -->
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<!-- ============================= -->
+<!-- FOOTER -->
+<!-- ============================= -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img src="{% static 'images/logo.png' %}" alt="Purple Nest">
+      <p>Purple Nest</p>
     </div>
-  {% endif %}
 
-  <!-- ================= MAIN CONTENT ================= -->
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer>
-    <div class="footer-container">
-      <div>
-        <h3>Waves Technologies</h3>
-        <p>Quality products with reliable service.</p>
-      </div>
-      <div>
-        <h3>Quick Links</h3>
-        <a href="{% url 'home' %}">Home</a><br>
-        <a href="{% url 'products' %}">Products</a><br>
-        <a href="{% url 'about' %}">About</a><br>
-        <a href="{% url 'contact' %}">Contact</a>
-      </div>
-      <div>
-        <h3>Follow Us</h3>
-        <div class="social-media">
-          <a href="#"><img src="{% static 'images/facebook.png' %}" alt=""></a>
-          <a href="#"><img src="{% static 'images/instagram.png' %}" alt=""></a>
-          <a href="#"><img src="{% static 'images/twitter.png' %}" alt=""></a>
-        </div>
-      </div>
+    <div class="quick-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'products' %}">Shop</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
     </div>
-    <p style="text-align:center;">&copy; 2025 Waves Technologies. All rights reserved.</p>
-  </footer>
 
+    <div class="contact-info">
+      <h4>Contact</h4>
+      <p>Email: info@purplenest.com</p>
+      <p>Phone: +91 12345 67890</p>
+      <p>Address: 123, Purple Street, India</p>
+    </div>
+
+    <div class="social-media">
+      <h4>Follow Us</h4>
+      <a href="#"><img src="{% static 'images/facebook.png' %}" alt="Facebook"></a>
+      <a href="#"><img src="{% static 'images/instagram.png' %}" alt="Instagram"></a>
+      <a href="#"><img src="{% static 'images/twitter.png' %}" alt="Twitter"></a>
+    </div>
+  </div>
+  <p class="copyright">© 2025 Purple Nest. All Rights Reserved.</p>
+</footer>
+
+<!-- Scripts -->
+<script src="{% static 'js/script.js' %}"></script>
+{% block extra_js %}{% endblock %}
 </body>
 </html>
