@@ -1,0 +1,77 @@
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- HERO BANNER -->
+<section class="about-hero" style="background-image: url('{% static "images/about-hero.jpg" %}');">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>About Purple Nest</h1>
+      <p>Delivering Style, Quality, and Trust</p>
+      <a href="{% url 'products' %}" class="btn">Shop Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="about-story">
+  <div class="container">
+    <h2>Our Story</h2>
+    <p>Purple Nest started with a vision to bring high-quality, modern lifestyle products to your doorstep. Our team carefully curates every collection to ensure style, affordability, and satisfaction.</p>
+    <p>Since our inception, we have been committed to providing an exceptional shopping experience with reliable delivery, premium quality products, and excellent customer support.</p>
+  </div>
+</section>
+
+<!-- VISION, MISSION & VALUES -->
+<section class="about-values">
+  <div class="container grid">
+    <div class="card">
+      <span>🎯</span>
+      <h3>Vision</h3>
+      <p>To be the leading destination for premium lifestyle products.</p>
+    </div>
+    <div class="card">
+      <span>🚀</span>
+      <h3>Mission</h3>
+      <p>Delivering quality, style, and convenience to every customer.</p>
+    </div>
+    <div class="card">
+      <span>💎</span>
+      <h3>Values</h3>
+      <p>Customer-first, Sustainability, Innovation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-choose-us">
+  <div class="container grid features-grid">
+    <div class="feature">
+      <span>💎</span>
+      <h4>High-Quality Products</h4>
+      <p>Only the best items selected for our customers.</p>
+    </div>
+    <div class="feature">
+      <span>🚚</span>
+      <h4>Fast Delivery</h4>
+      <p>Reliable shipping straight to your doorstep.</p>
+    </div>
+    <div class="feature">
+      <span>💬</span>
+      <h4>24/7 Support</h4>
+      <p>We are always here to help you with any queries.</p>
+    </div>
+    <div class="feature">
+      <span>🔒</span>
+      <h4>Secure Payments</h4>
+      <p>Your payments are safe and fully encrypted.</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

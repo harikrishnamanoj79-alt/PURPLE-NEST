@@ -1,0 +1,71 @@
+/* ============================= */
+/* ORDER CONFIRMATION PAGE STYLES */
+
+.order-confirmation-section {
+  padding: 4rem 2rem;
+  background: var(--secondary-color);
+}
+
+.confirmation-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.confirmation-container h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.confirmation-container p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.order-summary {
+  background: var(--white);
+  padding: 1.8rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--shadow);
+  text-align: left;
+  margin: 2rem 0;
+}
+
+.order-summary h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.order-summary p {
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.confirmation-actions .btn {
+  padding: 0.6rem 1rem;
+  flex: 1 1 45%;
+}
+
+.secondary-btn {
+  background: #ccc;
+  color: #333;
+}
+
+.secondary-btn:hover {
+  background: #b3b3b3;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .confirmation-actions .btn {
+    flex: 1 1 100%;
+  }
+}

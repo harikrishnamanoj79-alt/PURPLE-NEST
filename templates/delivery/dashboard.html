@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/delivery_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="delivery-dashboard-container">
+
+  <!-- HEADER -->
+  <div class="dashboard-header">
+    <h1>🚚 Delivery Dashboard</h1>
+    <p>Welcome, {{ user.first_name }}! Manage your assigned deliveries efficiently.</p>
+  </div>
+
+  <!-- ACTIVE DELIVERIES -->
+  <section class="active-deliveries">
+    <h2>📦 Active Deliveries</h2>
+
+    {% if active_deliveries %}
+    <div class="delivery-grid">
+      {% for delivery in active_deliveries %}
+      <div class="delivery-card">
+        <div class="delivery-header">
+          <h3>Order #{{ delivery.order.id }}</h3>
+          <span class="status {{ delivery.status|lower }}">{{ delivery.status }}</span>
+        </div>
+
+        <p><strong>Customer:</strong> {{ delivery.order.customer.first_name }} {{ delivery.order.customer.last_name }}</p>
+        <p><strong>Address:</strong> {{ delivery.order.address }}</p>
+        <p><strong>Total:</strong> ₹{{ delivery.order.total_amount }}</p>
+        <p><strong>Updated:</strong> {{ delivery.updated_at|date:"M d, Y - H:i A" }}</p>
+
+        <div class="actions">
+          <a href="{% url 'view_order_details' delivery.order.id %}" class="btn secondary">View Details</a>
+          <a href="{% url 'update_delivery_status' delivery.order.id %}" class="btn primary">Update Status</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="no-delivery">No active deliveries at the moment.</p>
+    {% endif %}
+  </section>
+
+  <!-- COMPLETED DELIVERIES -->
+  <section class="completed-deliveries">
+    <h2>✅ Completed Deliveries</h2>
+    {% if completed_deliveries %}
+    <table class="completed-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Delivered On</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in completed_deliveries %}
+        <tr>
+          <td>#{{ d.order.id }}</td>
+          <td>{{ d.order.customer.username }}</td>
+          <td>{{ d.updated_at|date:"M d, Y - H:i A" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p class="no-delivery">No completed deliveries yet.</p>
+    {% endif %}
+  </section>
+
+</div>
+
+{% endblock %}

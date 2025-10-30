@@ -1,0 +1,81 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_add_product.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1>Add New Product</h1>
+        <p>Fill in the details below to add a product to the store.</p>
+    </div>
+
+    <!-- ADD PRODUCT FORM -->
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- PRODUCT NAME -->
+            <div class="form-group">
+                <label for="name">Product Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter product name" required>
+            </div>
+
+            <!-- CATEGORY -->
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- PRICE -->
+            <div class="form-group">
+                <label for="price">Price (₹)</label>
+                <input type="number" id="price" name="price" placeholder="Enter product price" step="0.01" min="0" required>
+            </div>
+
+            <!-- STOCK -->
+            <div class="form-group">
+                <label for="stock">Stock Quantity</label>
+                <input type="number" id="stock" name="stock" placeholder="Enter stock quantity" min="0" required>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Enter product description" rows="4" required></textarea>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="form-group">
+                <label for="image">Product Image</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+            </div>
+
+            <!-- FEATURED -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="is_featured" name="is_featured">
+                <label for="is_featured">Mark as Featured Product</label>
+            </div>
+
+            <!-- FORM BUTTONS -->
+            <div class="form-actions">
+                <button type="submit" class="btn save-btn">Save Product</button>
+                <a href="{% url 'admin_dashboard' %}" class="btn cancel-btn">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

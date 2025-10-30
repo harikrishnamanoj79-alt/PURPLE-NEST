@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purple Nest</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============================= -->
+<!-- 1️⃣ NAVBAR -->
+<!-- ============================= -->
+<header>
+  <nav class="navbar sticky">
+    <div class="logo">
+      <img src="{% static 'images/logo.png' %}" alt="Purple Nest Logo">
+      Purple Nest
+    </div>
+
+   
+
+    <ul class="nav-links">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'products' %}">Shop</a></li>
+      <li>
+        <a href="#">Categories</a>
+        <ul class="dropdown">
+          {% for category in categories %}
+            <li><a href="{% url 'category_products' category.id %}">{{ category.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li><a href="{% url 'contact' %}">Contact Us</a></li>
+      <li><a href="{% url 'about' %}">About Us</a></li>
+
+      <!-- Search Bar -->
+      <li class="nav-search">
+        <form method="GET" action="{% url 'search_products' %}">
+          <input type="text" name="q" placeholder="Search products..." required>
+          <button type="submit">🔍</button>
+        </form>
+      </li>
+
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="{% url 'cart_view' %}">🛒 Cart ({{ request.user.cart_set.count }})</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>
+
+
+<!-- ============================= -->
+<!-- 2️⃣ HERO SECTION -->
+<!-- ============================= -->
+<section class="hero-slider">
+  {% comment %} Use JS slider logic to rotate images {% endcomment %}
+  <div class="slide" style="background-image: url('{% static "images/hero1.png" %}');">
+    <div class="hero-content">
+      <h1>Shop the Latest Fashion & Lifestyle Products</h1>
+      <p>Quality you can trust from Purple Nest</p>
+      <a href="{% url 'products' %}" class="btn">Shop Now</a>
+    </div>
+  </div>
+  <div class="slide" style="background-image: url('{% static "images/hero2.png" %}');">
+    <div class="hero-content">
+      <h1>Discover Stylish, Modern & Affordable Collections</h1>
+      <p>Quality you can trust from Purple Nest</p>
+      <a href="{% url 'products' %}" class="btn">View Collections</a>
+    </div>
+  </div>
+  <div class="slide" style="background-image: url('{% static "images/hero3.png" %}');">
+    <div class="hero-content">
+      <h1>Bring Elegance to Your Lifestyle</h1>
+      <p>Quality you can trust from Purple Nest</p>
+      <a href="{% url 'products' %}" class="btn">Shop Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- 3️⃣ FEATURED CATEGORIES -->
+<!-- ============================= -->
+<section class="featured-categories">
+  <h2>Featured Categories</h2>
+  <div class="category-grid">
+    {% for category in categories|slice:":5" %}
+      <div class="category-card">
+       {% if category.image %}
+  <img src="{{ category.image.url }}" alt="{{ category.name }}">
+{% else %}
+  <img src="{% static 'images/default.jpg' %}" alt="No Image">
+{% endif %}
+        <h3>{{ category.name }}</h3>
+        <a href="{% url 'category_products' category.id %}" class="btn">View More</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- 4️⃣ FEATURED PRODUCTS -->
+<!-- ============================= -->
+<section class="featured-products">
+  <h2>Featured Products</h2>
+  <div class="product-grid">
+    {% for product in featured_products %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p class="price">₹{{ product.price }}</p>
+        <a href="{% url 'product_detail' product.id %}" class="btn">View Details</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- 5️⃣ PROMO / OFFER BANNER -->
+<!-- ============================= -->
+<section class="promo-banner">
+  <p>🎉 Big Sale – Up to 40% off on all Fashion items!</p>
+  <a href="{% url 'category_products' 1 %}" class="btn">Shop Now</a>
+</section>
+
+<!-- ============================= -->
+<!-- 6️⃣ WHY CHOOSE US -->
+<!-- ============================= -->
+<section class="why-choose-us">
+  <h2>Why Choose Purple Nest</h2>
+  <div class="features-grid">
+    <div class="feature">
+      <span>💎</span>
+      <p>High-Quality Products</p>
+    </div>
+    <div class="feature">
+      <span>🚚</span>
+      <p>Fast Delivery</p>
+    </div>
+    <div class="feature">
+      <span>💬</span>
+      <p>24/7 Support</p>
+    </div>
+    <div class="feature">
+      <span>🔒</span>
+      <p>Secure Payments</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- 7️⃣ FOOTER -->
+<!-- ============================= -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img src="{% static 'images/logo.png' %}" alt="Purple Nest">
+      <p>Purple Nest</p>
+    </div>
+    <div class="quick-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'products' %}">Shop</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </div>
+    <div class="contact-info">
+      <h4>Contact</h4>
+      <p>Email: info@purplenest.com</p>
+      <p>Phone: +91 12345 67890</p>
+      <p>Address: 123, Purple Street, India</p>
+    </div>
+    <div class="social-media">
+      <h4>Follow Us</h4>
+      <a href="#"><img src="{% static 'images/facebook.png' %}" alt="Facebook"></a>
+      <a href="#"><img src="{% static 'images/instagram.png' %}" alt="Instagram"></a>
+      <a href="#"><img src="{% static 'images/twitter.png' %}" alt="Twitter"></a>
+    </div>
+  </div>
+  <p class="copyright">© 2025 Purple Nest. All Rights Reserved.</p>
+</footer>
+
+<!-- ============================= -->
+<!-- SCRIPTS -->
+<!-- ============================= -->
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+/* ======== Overall Section ======== */
+.checkout-section {
+  background: #f5f3fa; /* soft lavender background */
+  padding: 60px 0;
+}
+
+.checkout-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(126, 63, 242, 0.15);
+  padding: 40px;
+  transition: 0.3s;
+}
+
+.checkout-container h2 {
+  text-align: center;
+  color: #6a1bb5;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* ======== Grid Layout ======== */
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* ======== Order Summary ======== */
+.order-summary {
+  border-right: 2px solid #ece3fa;
+  padding-right: 20px;
+}
+
+.order-summary h3 {
+  font-size: 1.3rem;
+  color: #6a1bb5;
+  margin-bottom: 20px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f7f2ff;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease;
+}
+
+.order-item:hover {
+  transform: scale(1.02);
+}
+
+.order-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #e3d4ff;
+}
+
+.order-item h4 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #4b007d;
+}
+
+.order-item p {
+  color: #5e5e5e;
+  margin: 5px 0;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #7e3ff2;
+  text-align: right;
+  margin-top: 20px;
+}
+
+/* ======== Checkout Form ======== */
+.checkout-form h3 {
+  font-size: 1.3rem;
+  color: #6a1bb5;
+  margin-bottom: 20px;
+}
+
+.checkout-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkout-form label {
+  font-weight: 600;
+  color: #4a007b;
+}
+
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select {
+  padding: 12px;
+  border: 1px solid #c9aefc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: 0.3s;
+  background: #faf8ff;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus,
+.checkout-form select:focus {
+  border-color: #7e3ff2;
+  outline: none;
+  box-shadow: 0 0 6px rgba(126, 63, 242, 0.4);
+}
+
+.checkout-form textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* ======== Button ======== */
+.btn {
+  background: #7e3ff2;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #6a1bb5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(106, 27, 181, 0.3);
+}
+
+/* ======== Responsive ======== */
+@media (max-width: 768px) {
+  .checkout-content {
+    grid-template-columns: 1fr;
+  }
+
+  .order-summary {
+    border: none;
+    padding-right: 0;
+  }
+}

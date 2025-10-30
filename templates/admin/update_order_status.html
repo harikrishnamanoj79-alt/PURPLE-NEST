@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_update_order_status.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Update Order Status</h1>
+    <p>Manage and track the progress of customer orders.</p>
+  </div>
+
+  <!-- ORDER DETAILS -->
+  <div class="order-details">
+    <div class="order-card">
+      <h2>Order #{{ order.id }}</h2>
+      <p><strong>Customer:</strong> {{ order.user.username }}</p>
+      <p><strong>Email:</strong> {{ order.user.email }}</p>
+      <p><strong>Date:</strong> {{ order.created_at|date:"M d, Y - H:i A" }}</p>
+      <p><strong>Payment:</strong> {{ order.payment_status }}</p>
+      <p><strong>Delivery Address:</strong> {{ order.address }}</p>
+      <p><strong>Total:</strong> ₹{{ order.total_price }}</p>
+    </div>
+
+    <!-- ORDER ITEMS -->
+    <div class="items-card">
+      <h3>Ordered Items</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in order.items.all %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.total_price }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- UPDATE FORM -->
+  <div class="update-section">
+    <h2>Change Order Status</h2>
+    <form method="POST" action="{% url 'update_order_status' order.id %}">
+      {% csrf_token %}
+
+      <label for="status">Select New Status:</label>
+      <select id="status" name="status" required>
+        <option value="Pending" {% if order.status == "Pending" %}selected{% endif %}>Pending</option>
+        <option value="Processing" {% if order.status == "Processing" %}selected{% endif %}>Processing</option>
+        <option value="Shipped" {% if order.status == "Shipped" %}selected{% endif %}>Shipped</option>
+        <option value="Delivered" {% if order.status == "Delivered" %}selected{% endif %}>Delivered</option>
+        <option value="Cancelled" {% if order.status == "Cancelled" %}selected{% endif %}>Cancelled</option>
+      </select>
+
+      <label for="delivery_person">Assign Delivery Person:</label>
+      <select id="delivery_person" name="delivery_person">
+        <option value="">-- Select Delivery Person --</option>
+        {% for person in delivery_persons %}
+          <option value="{{ person.id }}" {% if order.delivery_person_id == person.id %}selected{% endif %}>
+            {{ person.username }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label for="admin_note">Admin Note (optional):</label>
+      <textarea name="admin_note" id="admin_note" rows="3" placeholder="Enter a note...">{{ order.admin_note }}</textarea>
+
+      <button type="submit" class="btn primary">Update Order</button>
+      <a href="{% url 'admin_dashboard' %}" class="btn secondary">Cancel</a>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

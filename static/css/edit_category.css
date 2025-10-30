@@ -1,0 +1,133 @@
+/* ------------------------------
+   Edit Category Page Styles
+------------------------------ */
+
+body {
+  background-color: #f8f9fc;
+  font-family: "Poppins", sans-serif;
+}
+
+.edit-category-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+/* ---------- PAGE HEADER ---------- */
+.page-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  color: #5b21b6;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* ---------- FORM ---------- */
+.edit-category-form .form-group {
+  margin-bottom: 20px;
+}
+
+.edit-category-form label {
+  display: block;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.edit-category-form input[type="text"],
+.edit-category-form textarea,
+.edit-category-form input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+.edit-category-form input:focus,
+.edit-category-form textarea:focus {
+  border-color: #7c3aed;
+  outline: none;
+}
+
+/* ---------- IMAGE PREVIEW ---------- */
+.image-preview img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb;
+  margin-top: 10px;
+}
+
+.image-preview .no-image {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* ---------- BUTTONS ---------- */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+/* Save Button (Purple) */
+.save-btn {
+  background: #7c3aed;
+  color: #fff;
+}
+
+.save-btn:hover {
+  background: #6d28d9;
+}
+
+/* Cancel Button (Gray) */
+.cancel-btn {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.cancel-btn:hover {
+  background: #d1d5db;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .edit-category-container {
+    padding: 25px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}

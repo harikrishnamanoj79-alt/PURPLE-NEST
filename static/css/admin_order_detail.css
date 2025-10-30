@@ -1,0 +1,132 @@
+/* --- GENERAL PAGE STYLING --- */
+body {
+  background-color: #f7f5ff;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.admin-order-detail {
+  padding: 50px 0;
+}
+
+.container {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(121, 82, 179, 0.15);
+  max-width: 900px;
+  margin: auto;
+}
+
+/* --- HEADER --- */
+.admin-order-detail h2 {
+  font-size: 1.8rem;
+  color: #5b2caf;
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #d1b3ff;
+  padding-bottom: 10px;
+}
+
+.admin-order-detail h3 {
+  font-size: 1.3rem;
+  color: #5b2caf;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+/* --- ORDER INFO --- */
+.admin-order-detail p {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: #555;
+}
+
+.admin-order-detail strong {
+  color: #5b2caf;
+}
+
+/* --- TABLE STYLING --- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background-color: #faf7ff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th {
+  background-color: #5b2caf;
+  color: #fff;
+  text-align: left;
+  padding: 12px 15px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e3d5ff;
+  font-size: 0.95rem;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- STATUS TAGS --- */
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status.pending {
+  background-color: #f3e6ff;
+  color: #6f42c1;
+}
+
+.status.processing {
+  background-color: #e0dcff;
+  color: #4b3fa8;
+}
+
+.status.delivered {
+  background-color: #e6ffe6;
+  color: #1b7a1b;
+}
+
+.status.cancelled {
+  background-color: #ffe6e6;
+  color: #a83232;
+}
+
+/* --- BUTTONS --- */
+.btn {
+  display: inline-block;
+  background: #5b2caf;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.3s ease;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background: #7849d4;
+  box-shadow: 0 4px 10px rgba(121, 82, 179, 0.3);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .table th, .table td {
+    padding: 10px;
+  }
+}

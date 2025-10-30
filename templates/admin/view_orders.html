@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_view_orders.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-container">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>Manage Orders</h1>
+    <p>View and update all customer orders below.</p>
+  </div>
+
+  <!-- ORDERS TABLE -->
+  <div class="orders-table">
+    {% if orders %}
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Date</th>
+          <th>Total Amount</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>#{{ order.id }}</td>
+          <td>{{ order.user.username }}</td>
+          <td>{{ order.created_at|date:"M d, Y" }}</td>
+          <td>₹{{ order.total_amount }}</td>
+          <td>
+            <span class="status {{ order.status|lower }}">
+              {{ order.status }}
+            </span>
+          </td>
+          <td>
+            <a href="{% url 'admin_order_detail' order.id %}" class="btn view-btn">View</a>
+            <form method="POST" action="{% url 'update_order_status' order.id %}" class="status-form">
+              {% csrf_token %}
+              <select name="status" onchange="this.form.submit()">
+                <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                <option value="Processing" {% if order.status == 'Processing' %}selected{% endif %}>Processing</option>
+                <option value="Shipped" {% if order.status == 'Shipped' %}selected{% endif %}>Shipped</option>
+                <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                <option value="Cancelled" {% if order.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+              </select>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p class="no-data">No orders found.</p>
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}

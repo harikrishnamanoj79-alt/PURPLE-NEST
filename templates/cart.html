@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<section class="cart-section">
+  <div class="container cart-container">
+    <h2>My Cart</h2>
+
+    {% if cart_items %}
+      <form method="POST">
+        {% csrf_token %}
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price (₹)</th>
+              <th>Quantity</th>
+              <th>Subtotal (₹)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart_items %}
+            <tr>
+              <td>
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-product-img">
+                {{ item.product.name }}
+              </td>
+              <td>{{ item.product.price }}</td>
+              <td>
+                <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}">
+              </td>
+              <td>{{ item.quantity|multiply:item.product.price }}</td>
+              <td>
+                <a href="{% url 'remove_from_cart' item.id %}" class="btn remove-btn">Remove</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="cart-summary">
+          <p><strong>Total: ₹{{ total_amount }}</strong></p>
+          <button type="submit" class="btn">Update Cart</button>
+          <a href="{% url 'cart_checkout' %}" class="btn checkout-btn">Proceed to Checkout</a>
+        </div>
+      </form>
+    {% else %}
+      <p>Your cart is empty.</p>
+      <a href="{% url 'products' %}" class="btn secondary-btn">Shop Now</a>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

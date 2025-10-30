@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/delivery_order_details.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="order-details-container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>📦 Order #{{ order.id }}</h1>
+    <p>Placed on {{ order.created_at|date:"M d, Y - h:i A" }}</p>
+  </div>
+
+  <!-- ORDER STATUS -->
+  <div class="status-box">
+    <span class="status-label">Current Status:</span>
+    <span class="status {{ order.status|lower }}">{{ order.status }}</span>
+  </div>
+
+  <!-- CUSTOMER DETAILS -->
+  <section class="customer-info">
+    <h2>👤 Customer Details</h2>
+    <p><strong>Name:</strong> {{ order.customer.first_name }} {{ order.customer.last_name }}</p>
+    <p><strong>Phone:</strong> {{ order.customer.phone }}</p>
+    <p><strong>Email:</strong> {{ order.customer.email }}</p>
+    <p><strong>Address:</strong> {{ order.address }}</p>
+  </section>
+
+  <!-- ORDER ITEMS -->
+  <section class="items">
+    <h2>🛍️ Ordered Items</h2>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in order.items.all %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>₹{{ item.product.price }}</td>
+          <td>₹{{ item.product.price|floatformat:2|add:item.quantity }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PAYMENT INFO -->
+  <section class="payment-info">
+    <h2>💳 Payment Details</h2>
+    <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+    <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
+  </section>
+
+  <!-- ACTION BUTTONS -->
+  <div class="actions">
+    <a href="{% url 'update_delivery_status' order.id %}" class="btn primary">Update Status</a>
+    <a href="{% url 'delivery_dashboard' %}" class="btn secondary">Back to Dashboard</a>
+  </div>
+
+</div>
+{% endblock %}

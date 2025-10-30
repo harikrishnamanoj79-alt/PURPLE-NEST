@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- SEARCH RESULTS HEADER -->
+<section class="search-header">
+  <div class="container">
+    <h2>Search results for: "<span>{{ query }}</span>"</h2>
+    <p>{{ results.count }} product{{ results.count|pluralize }} found</p>
+  </div>
+</section>
+
+<!-- PRODUCTS GRID -->
+<section class="search-results">
+  <div class="container product-grid">
+    {% for product in results %}
+      <div class="product-card">
+        <div class="product-image">
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <p class="price">₹{{ product.price }}</p>
+          <a href="{% url 'product_detail' product.id %}" class="btn">View Details</a>
+        </div>
+      </div>
+    {% empty %}
+      <p class="no-results">No products found matching your search.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

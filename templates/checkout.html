@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="checkout-section">
+  <div class="checkout-container">
+    <h2>Checkout</h2>
+
+    <div class="checkout-content">
+      <!-- LEFT SIDE: ORDER SUMMARY -->
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+
+        {% if single_product_checkout %}
+          <div class="order-item">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <div>
+              <h4>{{ product.name }}</h4>
+              <p>Price: ₹{{ product.price }}</p>
+              <label>Quantity:</label>
+              <input type="number" name="quantity" value="1" min="1" form="checkout-form">
+            </div>
+          </div>
+          <p class="total">Total: ₹{{ product.price }}</p>
+
+        {% else %}
+          {% for item in cart_items %}
+          <div class="order-item">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            <div>
+              <h4>{{ item.product.name }}</h4>
+              <p>{{ item.quantity }} × ₹{{ item.product.price }}</p>
+            </div>
+          </div>
+          {% endfor %}
+          <p class="total">Total Amount: ₹{{ total_amount }}</p>
+        {% endif %}
+      </div>
+
+      <!-- RIGHT SIDE: CHECKOUT FORM -->
+      <div class="checkout-form">
+        <h3>Shipping Details</h3>
+        <form method="POST" id="checkout-form">
+          {% csrf_token %}
+          
+          <label>Full Name</label>
+          <input type="text" name="full_name" value="{{ user.get_full_name }}" required>
+
+          <label>Email</label>
+          <input type="email" name="email" value="{{ user.email }}" required>
+
+          <label>Phone</label>
+          <input type="text" name="phone" value="{{ user.profile.phone }}" required>
+
+          <label>Address</label>
+          <textarea name="address" required>{{ user.profile.address }}</textarea>
+
+          <label>Payment Method</label>
+          <select name="payment_method" required>
+            <option value="COD">Cash on Delivery</option>
+            <option value="Online">Online Payment</option>
+          </select>
+
+          <button type="submit" class="btn">Place Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

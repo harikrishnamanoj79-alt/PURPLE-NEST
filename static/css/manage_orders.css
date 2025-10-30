@@ -1,0 +1,100 @@
+.admin-container {
+  padding: 40px;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  margin-bottom: 25px;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.dashboard-header p {
+  color: #555;
+  margin-top: 5px;
+}
+
+.orders-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.orders-table th, .orders-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+.orders-table th {
+  background-color: #f1f3f5;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.orders-table tr:hover {
+  background: #fafafa;
+}
+
+.btn-table {
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-table.edit {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-table.delete {
+  background: #f44336;
+  color: white;
+}
+
+.btn-table:hover {
+  opacity: 0.8;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.empty-msg {
+  text-align: center;
+  padding: 25px;
+  color: #777;
+  font-style: italic;
+}
+

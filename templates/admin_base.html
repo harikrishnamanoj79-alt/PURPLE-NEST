@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - {% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/admin_base.css' %}">
+    {% block extra_css %}
+    
+    {% endblock %}
+</head>
+<body>
+
+<div class="admin-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>🛍️ Admin Panel</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'admin_dashboard' %}" class="nav-link">🏠 Dashboard</a></li>
+                <li><a href="{% url 'add_product' %}" class="nav-link">➕ Add Product</a></li>
+                <li><a href="{% url 'manage_products' %}" class="nav-link">📦 Manage Products</a></li>
+                <li><a href="{% url 'manage_orders' %}" class="nav-link">📋 Manage Orders</a></li>
+                <li><a href="{% url 'manage_users' %}" class="nav-link">👥 Manage Users</a></li>
+                <li><a href="{% url 'manage_categories' %}" class="nav-link">🗂️ Categories</a></li>
+                <li><a href="{% url 'logout' %}" class="nav-link logout">🚪 Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="admin-header">
+            <h1>{% block header_title %}{% endblock %}</h1>
+            <p>Welcome, {{ user.username }}</p>
+        </header>
+
+        <section class="admin-content">
+            {% block content %}{% endblock %}
+        </section>
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+/* ============================== */
+/* ADMIN VIEW ORDERS PAGE */
+.admin-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.page-header h1 {
+  color: #6a1a82;
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
+
+.page-header p {
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.orders-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.orders-table th, .orders-table td {
+  text-align: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.orders-table th {
+  background: #f8f4fb;
+  color: #6a1a82;
+  font-weight: 600;
+}
+
+.orders-table tr:hover {
+  background: #faf7ff;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status.pending { background: #fff4cc; color: #b38b00; }
+.status.processing { background: #dbe9ff; color: #004aad; }
+.status.shipped { background: #ccf5e7; color: #007a4d; }
+.status.delivered { background: #d7f5d7; color: #1a7f1a; }
+.status.cancelled { background: #ffd6d6; color: #a30000; }
+
+.btn {
+  text-decoration: none;
+  background: #6a1a82;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #520d66;
+}
+
+.status-form {
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.status-form select {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* EMPTY STATE */
+.no-data {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 1rem;
+    background: #fff;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #6a1a82;
+  }
+
+  .status-form select {
+    width: 100%;
+  }
+}

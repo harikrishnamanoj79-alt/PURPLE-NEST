@@ -1,0 +1,84 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-container">
+
+    <!-- DASHBOARD HEADER -->
+    <div class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome back, {{ user.username }}!</p>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stat-cards">
+        <div class="card total-users">
+            <h3>Total Users</h3>
+            <p>{{ total_users }}</p>
+        </div>
+        <div class="card total-products">
+            <h3>Total Products</h3>
+            <p>{{ total_products }}</p>
+        </div>
+        <div class="card total-orders">
+            <h3>Total Orders</h3>
+            <p>{{ total_orders }}</p>
+        </div>
+        <div class="card total-revenue">
+            <h3>Total Revenue</h3>
+            <p>₹{{ total_revenue }}</p>
+        </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+        <a href="{% url 'add_product' %}" class="btn action-btn">Add Product</a>
+        <a href="{% url 'manage_categories' %}" class="btn action-btn">Manage Categories</a>
+        <a href="{% url 'view_orders' %}" class="btn action-btn">View Orders</a>
+        <a href="{% url 'manage_users' %}" class="btn action-btn">Manage Users</a>
+    </div>
+
+    <!-- RECENT ORDERS TABLE -->
+    <div class="recent-orders">
+        <h2>Recent Orders</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in recent_orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.customer.username }}</td>
+                    <td>₹{{ order.total_amount }}</td>
+                    <td>{{ order.status|capfirst }}</td>
+                    <td>{{ order.created_at|date:"M d, Y" }}</td>
+                    <td>
+                        <a href="{% url 'update_order_status' order.id %}" class="btn-table">Update</a>
+                        <a href="{% url 'assign_delivery' order.id %}" class="btn-table">Assign Delivery</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No recent orders.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

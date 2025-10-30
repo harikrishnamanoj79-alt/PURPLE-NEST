@@ -1,0 +1,57 @@
+/* ============================= */
+/* PROFILE PAGE STYLES */
+
+.profile-section {
+  padding: 4rem 2rem;
+  background: var(--secondary-color);
+}
+
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.profile-container h2 {
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.profile-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--shadow);
+  text-align: left;
+}
+
+.profile-card p {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.profile-card strong {
+  color: var(--primary-color);
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.profile-actions .btn {
+  flex: 1;
+  padding: 0.6rem;
+  text-align: center;
+}
+
+.secondary-btn {
+  background: #ccc;
+  color: #333;
+}
+
+.secondary-btn:hover {
+  background: #b3b3b3;
+}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/delivery_history.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="delivery-history-container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>📜 Delivery History</h1>
+    <p>All past deliveries completed by you.</p>
+  </div>
+
+  <!-- FILTER SECTION -->
+  <form method="GET" class="filters">
+    <select name="status">
+      <option value="">All Status</option>
+      <option value="delivered" {% if request.GET.status == 'delivered' %}selected{% endif %}>Delivered</option>
+      <option value="cancelled" {% if request.GET.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+    </select>
+
+    <input type="date" name="from" value="{{ request.GET.from }}">
+    <input type="date" name="to" value="{{ request.GET.to }}">
+    <button type="submit" class="btn">Filter</button>
+  </form>
+
+  <!-- HISTORY TABLE -->
+  <div class="history-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Address</th>
+          <th>Delivered On</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in deliveries %}
+        <tr>
+          <td>#{{ order.id }}</td>
+          <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+          <td>{{ order.address|truncatechars:30 }}</td>
+          <td>{{ order.delivered_at|date:"M d, Y - h:i A" }}</td>
+          <td>
+            <span class="status {{ order.status|lower }}">{{ order.status }}</span>
+          </td>
+          <td>
+            <a href="{% url 'delivery_order_details' order.id %}" class="btn small">View</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="no-data">No delivery history found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BACK BUTTON -->
+  <div class="back-btn">
+    <a href="{% url 'delivery_dashboard' %}" class="btn secondary">← Back to Dashboard</a>
+  </div>
+
+</div>
+{% endblock %}

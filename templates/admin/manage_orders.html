@@ -1,0 +1,71 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/manage_orders.css' %}">
+<style>
+  .btn-table.assign {
+    background-color: #6a0dad;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  .btn-table.assign:hover {
+    background-color: #8a2be2;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+
+  <div class="dashboard-header">
+    <h1>Manage Orders</h1>
+    <p>View, update, or manage customer orders here.</p>
+  </div>
+
+  <div class="orders-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>#{{ order.id }}</td>
+          <td>{{ order.customer.username }}</td>
+          <td>₹{{ order.total_amount }}</td>
+          <td>
+            <span class="status {{ order.status|lower }}">
+              {{ order.status|capfirst }}
+            </span>
+          </td>
+          <td>{{ order.created_at|date:"M d, Y" }}</td>
+          <td>
+            <a href="{% url 'update_order_status' order.id %}" class="btn-table edit">Update</a>
+            <a href="{% url 'assign_delivery' order.id %}" class="btn-table assign">Assign Delivery</a>
+            <a href="{% url 'delete_order' order.id %}" class="btn-table delete">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="empty-msg">No orders found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock %}

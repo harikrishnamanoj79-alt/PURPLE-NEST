@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/order_page.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="order-section">
+  <div class="container order-container">
+    <h2>Order Now</h2>
+    <div class="order-card">
+      <div class="product-info">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <div class="details">
+          <h3>{{ product.name }}</h3>
+          <p class="price">₹{{ product.price }}</p>
+          <p class="stock">Available Stock: {{ product.stock }}</p>
+        </div>
+      </div>
+
+      <form method="POST" class="order-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" name="quantity" min="1" max="{{ product.stock }}" value="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Delivery Address</label>
+          <textarea id="address" name="address" rows="3" required>{{ user.address }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="payment_method">Payment Method</label>
+          <select id="payment_method" name="payment_method" required>
+            <option value="COD">Cash on Delivery</option>
+            <option value="Online">Online Payment</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn">Place Order</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

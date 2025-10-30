@@ -1,0 +1,126 @@
+.delivery-dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dashboard-header h1 {
+  color: #6a1a82;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* ACTIVE DELIVERIES */
+.active-deliveries h2,
+.completed-deliveries h2 {
+  color: #6a1a82;
+  margin-bottom: 1rem;
+}
+
+.delivery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.delivery-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  position: relative;
+}
+
+.delivery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.status {
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.status.assigned { background: #6a1a82; }
+.status.picked_up { background: #ff9800; }
+.status.out_for_delivery { background: #03a9f4; }
+.status.delivered { background: #4caf50; }
+
+.delivery-card p {
+  color: #444;
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn.primary {
+  background: #6a1a82;
+  color: white;
+}
+
+.btn.secondary {
+  background: #f3e9ff;
+  color: #6a1a82;
+}
+
+/* COMPLETED DELIVERIES */
+.completed-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.completed-table th,
+.completed-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.completed-table th {
+  background: #f6f0fa;
+  color: #6a1a82;
+}
+
+.no-delivery {
+  color: #777;
+  font-style: italic;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+@media (max-width: 600px) {
+  .delivery-card {
+    padding: 1rem;
+  }
+  .actions {
+    flex-direction: column;
+  }
+}

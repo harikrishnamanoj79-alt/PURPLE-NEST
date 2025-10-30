@@ -1,0 +1,52 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/edit_category.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="edit-category-container">
+  
+  <div class="page-header">
+    <h1>Edit Category</h1>
+    <p>Update the category details below.</p>
+  </div>
+
+  <div class="edit-category-box">
+    <form method="POST" enctype="multipart/form-data" class="edit-category-form">
+      {% csrf_token %}
+      
+      <div class="form-group">
+        <label for="name">Category Name</label>
+        <input type="text" id="name" name="name" value="{{ category.name }}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="3">{{ category.description }}</textarea>
+      </div>
+
+      <div class="form-group image-preview">
+        <label>Current Image</label>
+        {% if category.image %}
+          <img src="{{ category.image.url }}" alt="{{ category.name }}">
+        {% else %}
+          <p class="no-image">No image uploaded</p>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="image">Change Image</label>
+        <input type="file" id="image" name="image" accept="image/*">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn save-btn">Save Changes</button>
+        <a href="{% url 'manage_categories' %}" class="btn cancel-btn">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

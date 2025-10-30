@@ -1,0 +1,109 @@
+.order-details-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header h1 {
+  color: #6a1a82;
+  margin-bottom: 0.3rem;
+}
+
+.header p {
+  color: #777;
+  margin-bottom: 1.5rem;
+}
+
+.status-box {
+  background: #f6f0fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.status-label {
+  font-weight: 600;
+  color: #444;
+  margin-right: 0.5rem;
+}
+
+.status {
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.status.pending { background: #ff9800; }
+.status.processing { background: #2196f3; }
+.status.shipped { background: #9c27b0; }
+.status.delivered { background: #4caf50; }
+
+section {
+  margin-bottom: 2rem;
+}
+
+section h2 {
+  color: #6a1a82;
+  margin-bottom: 1rem;
+}
+
+p {
+  color: #444;
+  line-height: 1.6;
+}
+
+/* TABLE */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.order-table th, .order-table td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.order-table th {
+  background: #f6f0fa;
+  color: #6a1a82;
+}
+
+/* BUTTONS */
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #6a1a82;
+  color: #fff;
+}
+
+.btn.secondary {
+  background: #f3e9ff;
+  color: #6a1a82;
+}
+
+@media (max-width: 600px) {
+  .order-table th, .order-table td {
+    font-size: 0.9rem;
+  }
+  .actions {
+    flex-direction: column;
+  }
+}

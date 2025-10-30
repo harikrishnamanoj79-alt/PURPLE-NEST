@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/404.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="error-404">
+  <div class="container">
+    <div class="error-content">
+      <h1>404</h1>
+      <h2>Oops! Page Not Found</h2>
+      <p>Sorry, the page you are looking for does not exist or has been moved.</p>
+      <a href="{% url 'home' %}" class="btn">Go Back Home</a>
+    </div>
+    <div class="error-image">
+      <img src="{% static 'images/404-illustration.png' %}" alt="404 Not Found">
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,138 @@
+/* =========================== */
+/* MANAGE USERS PAGE */
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.page-header h1 {
+  color: #6a1a82;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: #777;
+  margin-bottom: 1.5rem;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.filter-bar select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+/* TABLE STYLES */
+.user-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f8f4fb;
+  color: #6a1a82;
+  font-weight: 600;
+}
+
+td {
+  color: #333;
+}
+
+tr:hover {
+  background: #faf7ff;
+}
+
+/* STATUS TAGS */
+.status {
+  padding: 0.4rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status.active {
+  background: #e7f9ef;
+  color: #239a55;
+}
+
+.status.blocked {
+  background: #fde6e6;
+  color: #d21e1e;
+}
+
+/* BUTTONS */
+.btn.small {
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.btn.small.danger {
+  background: #c0392b;
+}
+
+.btn.small.success {
+  background: #239a55;
+}
+
+.btn.small {
+  background: #6a1a82;
+}
+
+.btn.small:hover {
+  opacity: 0.9;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  tr {
+    margin-bottom: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #6a1a82;
+  }
+}

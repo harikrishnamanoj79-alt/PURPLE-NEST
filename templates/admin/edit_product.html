@@ -1,0 +1,86 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_edit_product.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1>Edit Product</h1>
+        <p>Update product details below and save the changes.</p>
+    </div>
+
+    <!-- EDIT PRODUCT FORM -->
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- PRODUCT NAME -->
+            <div class="form-group">
+                <label for="name">Product Name</label>
+                <input type="text" id="name" name="name" value="{{ product.name }}" required>
+            </div>
+
+            <!-- CATEGORY -->
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if product.category.id == category.id %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- PRICE -->
+            <div class="form-group">
+                <label for="price">Price (₹)</label>
+                <input type="number" id="price" name="price" value="{{ product.price }}" step="0.01" min="0" required>
+            </div>
+
+            <!-- STOCK -->
+            <div class="form-group">
+                <label for="stock">Stock Quantity</label>
+                <input type="number" id="stock" name="stock" value="{{ product.stock }}" min="0" required>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" required>{{ product.description }}</textarea>
+            </div>
+
+            <!-- CURRENT IMAGE PREVIEW -->
+            <div class="form-group">
+                <label>Current Image:</label><br>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="preview-img">
+            </div>
+
+            <!-- NEW IMAGE UPLOAD -->
+            <div class="form-group">
+                <label for="image">Change Image (optional)</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+
+            <!-- FEATURED -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="is_featured" name="is_featured" {% if product.is_featured %}checked{% endif %}>
+                <label for="is_featured">Mark as Featured Product</label>
+            </div>
+
+            <!-- FORM BUTTONS -->
+            <div class="form-actions">
+                <button type="submit" class="btn save-btn">Update Product</button>
+                <a href="{% url 'admin_dashboard' %}" class="btn cancel-btn">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

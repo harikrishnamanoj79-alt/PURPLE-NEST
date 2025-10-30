@@ -1,0 +1,78 @@
+/* ============================= */
+/* MY ORDERS PAGE STYLES */
+
+.my-orders-section {
+  padding: 4rem 2rem;
+  background: var(--secondary-color);
+}
+
+.orders-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.orders-container h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.order-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+.order-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.order-card p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.order-items h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.order-items ul {
+  list-style: disc;
+  margin-left: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.order-card .btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.secondary-btn {
+  background: #ccc;
+  color: #333;
+}
+
+.secondary-btn:hover {
+  background: #b3b3b3;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .orders-grid {
+    grid-template-columns: 1fr;
+  }
+}

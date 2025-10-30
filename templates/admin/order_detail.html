@@ -1,0 +1,42 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_order_detail.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<section class="admin-order-detail">
+  <div class="container">
+    <h2>Order #{{ order.id }}</h2>
+    <p><strong>Customer:</strong> {{ order.customer.username }}</p>
+    <p><strong>Date:</strong> {{ order.created_at|date:"M d, Y" }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>Payment:</strong> {{ order.payment_method }}</p>
+    <p><strong>Total:</strong> ₹{{ order.total_amount }}</p>
+    <hr>
+
+    <h3>Items</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price (₹)</th>
+          <th>Subtotal (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.quantity|add:"0"|floatformat:2|add:item.price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

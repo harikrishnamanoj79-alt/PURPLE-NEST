@@ -1,0 +1,66 @@
+/* ============================= */
+/* 404 PAGE STYLES */
+
+.error-404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  flex-wrap: wrap;
+  min-height: 70vh;
+  background: var(--secondary-color);
+}
+
+.error-content {
+  max-width: 500px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.error-content h1 {
+  font-size: 6rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.error-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.error-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.error-content .btn {
+  padding: 0.6rem 1.2rem;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.error-content .btn:hover {
+  background: #4d1168;
+}
+
+.error-image img {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .error-404 {
+    flex-direction: column;
+  }
+  .error-content h1 {
+    font-size: 4rem;
+  }
+  .error-content h2 {
+    font-size: 1.5rem;
+  }
+}

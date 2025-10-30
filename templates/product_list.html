@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<!-- HERO -->
+<section class="product-hero">
+  <div class="container">
+    <h1>All Products</h1>
+    <p>Browse our wide collection of stylish products</p>
+  </div>
+</section>
+
+<!-- SEARCH & FILTER -->
+<section class="product-filters">
+  <div class="container">
+    <form method="GET" action="{% url 'search_products' %}">
+      <input type="text" name="q" placeholder="Search products..." value="{{ request.GET.q }}">
+      <button type="submit" class="btn">Search</button>
+    </form>
+
+    <div class="category-filters">
+      <a href="{% url 'products' %}" class="filter-btn {% if not request.GET.category %}active{% endif %}">All</a>
+      {% for category in categories %}
+        <a href="?category={{ category.id }}" class="filter-btn {% if request.GET.category|add:'' == category.id|stringformat:"s" %}active{% endif %}">
+          {{ category.name }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS GRID -->
+<section class="product-grid-section">
+  <div class="container grid">
+    {% for product in products %}
+      <div class="product-card">
+        <div class="product-image">
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <p class="price">₹{{ product.price }}</p>
+          <a href="{% url 'product_detail' product.id %}" class="btn">View Details</a>
+          {% if user.is_authenticated and user.role == 'customer' %}
+            <form method="POST" action="{% url 'add_to_cart' product.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn add-cart">Add to Cart</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p>No products found.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- OPTIONAL PAGINATION -->
+{% if products.has_other_pages %}
+  <div class="pagination">
+    {% if products.has_previous %}
+      <a href="?page={{ products.previous_page_number }}" class="btn">Previous</a>
+    {% endif %}
+    <span>Page {{ products.number }} of {{ products.paginator.num_pages }}</span>
+    {% if products.has_next %}
+      <a href="?page={{ products.next_page_number }}" class="btn">Next</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% endblock %}

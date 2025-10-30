@@ -1,0 +1,108 @@
+/* ============================= */
+/* ASSIGN DELIVERY PAGE */
+
+.admin-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.page-header h1 {
+  color: #6a1a82;
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
+
+.page-header p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* ORDER SUMMARY */
+.order-summary, .order-items, .assign-delivery {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.order-summary h2,
+.order-items h2,
+.assign-delivery h2 {
+  color: #6a1a82;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.order-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-summary li {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f8f4fb;
+  color: #6a1a82;
+}
+
+tr:hover {
+  background: #faf7ff;
+}
+
+/* FORM */
+.assign-delivery form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.assign-delivery select {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.btn {
+  background: #6a1a82;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #520d66;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .order-summary, .order-items, .assign-delivery {
+    padding: 1rem;
+  }
+
+  th, td {
+    font-size: 0.9rem;
+  }
+}

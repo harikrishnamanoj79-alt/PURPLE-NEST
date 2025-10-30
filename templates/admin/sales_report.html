@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_sales_report.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Sales Report</h1>
+    <p>View detailed sales performance and revenue insights.</p>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <form method="get">
+      <div class="filter-group">
+        <label for="from">From:</label>
+        <input type="date" name="from" id="from" value="{{ request.GET.from }}">
+      </div>
+
+      <div class="filter-group">
+        <label for="to">To:</label>
+        <input type="date" name="to" id="to" value="{{ request.GET.to }}">
+      </div>
+
+      <div class="filter-group">
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+          <option value="">All</option>
+          {% for cat in categories %}
+            <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>{{ cat.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn primary">Filter</button>
+      <a href="{% url 'download_sales_report' %}" class="btn secondary">Download Report</a>
+    </form>
+  </div>
+
+  <!-- SALES STATS -->
+  <div class="stats-container">
+    <div class="stat-card">
+      <h3>Total Orders</h3>
+      <p>{{ total_orders }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Total Revenue</h3>
+      <p>₹{{ total_revenue }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Average Order Value</h3>
+      <p>₹{{ avg_order_value }}</p>
+    </div>
+  </div>
+
+  <!-- SALES TABLE -->
+  <div class="sales-table">
+    <h2>Sales Details</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Total (₹)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in sales %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ order.date|date:"M d, Y" }}</td>
+          <td>{{ order.id }}</td>
+          <td>{{ order.user.username }}</td>
+          <td>{{ order.product.name }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.total_price }}</td>
+          <td>{{ order.status }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8">No sales found for selected filters.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock %}

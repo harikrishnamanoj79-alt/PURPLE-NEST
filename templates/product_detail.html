@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<section class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home' %}">Home</a> /
+    <a href="{% url 'category_products' product.category.id %}">{{ product.category.name }}</a> /
+    <span>{{ product.name }}</span>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL -->
+<section class="product-detail">
+  <div class="container detail-grid">
+
+    <!-- PRODUCT IMAGE -->
+    <div class="product-images">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <p class="price">₹{{ product.price }}</p>
+
+      <p class="stock {% if product.stock > 0 %}in-stock{% else %}out-stock{% endif %}">
+        {% if product.stock > 0 %}
+          In Stock
+        {% else %}
+          Out of Stock
+        {% endif %}
+      </p>
+
+      <p class="description">{{ product.description }}</p>
+
+      {% if user.is_authenticated and user.role == 'customer' %}
+      <div class="product-actions">
+        <!-- Add to Cart Form -->
+        <form method="POST" action="{% url 'add_to_cart' product.id %}">
+          {% csrf_token %}
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock }}">
+          <button type="submit" class="btn add-cart">🛒 Add to Cart</button>
+        </form>
+
+        <!-- Buy Now Form -->
+        <form method="POST" action="{% url 'checkout' product.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="btn buy-now">⚡ Buy Now</button>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="container">
+    <h2>Customer Reviews</h2>
+    {% for review in product.review_set.all|slice:":5" %}
+      <div class="review-card">
+        <p><strong>{{ review.user.username }}</strong> 
+        {% for i in "12345"|slice:":review.rating"|make_list %}⭐{% endfor %}</p>
+        <p>{{ review.comment }}</p>
+        <p class="date">{{ review.created_at|date:"M d, Y" }}</p>
+      </div>
+    {% empty %}
+      <p>No reviews yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- RELATED PRODUCTS -->
+<section class="related-products">
+  <div class="container">
+    <h2>Related Products</h2>
+    <div class="grid">
+      {% for rel in related_products %}
+        <div class="product-card">
+          <img src="{{ rel.image.url }}" alt="{{ rel.name }}">
+          <h3>{{ rel.name }}</h3>
+          <p class="price">₹{{ rel.price }}</p>
+          <a href="{% url 'product_detail' rel.id %}" class="btn">View Details</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
